@@ -1,0 +1,126 @@
+.techs {
+  max-width: 1280px;
+  font-family: "Inter", Arial, sans-serif;
+  color: #000;
+  background: #f5f5f5;
+  padding: 100px 70px;
+  box-sizing: border-box;
+}
+
+.techs__title {
+  max-width: 1140px;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: -0.88px;
+  margin: 0;
+  border-bottom: 1px solid #000;
+  padding-bottom: 23px;
+}
+
+.techs__subtitle {
+  font-size: 50px;
+  font-weight: 400;
+  line-height: 58px;
+  letter-spacing: -2px;
+  margin: 0;
+  text-align: center;
+  padding-top: 90px;
+}
+
+.techs__description {
+  max-width: 460px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.56px;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 26px;
+}
+
+.techs__list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none;
+  padding: 100px 0 0;
+  gap: 10px;
+  margin: 0;
+}
+
+.techs__item {
+  width: 90px;
+  max-height: 60px;
+  color: #000;
+  text-align: center;
+  font-family: Inter, Arial, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 60px;
+  letter-spacing: -0.56px;
+  border-radius: 10px;
+  background-color: #e8e8e8;
+}
+
+@media screen and (max-width: 768px) {
+  .techs {
+    padding: 90px 50px;
+  }
+
+  .techs__subtitle {
+    padding-top: 80px;
+  }
+
+  .techs__description {
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: -0.48px;
+    padding-top: 22px;
+  }
+
+  .techs__list {
+    padding: 83px 0 0;
+  }
+
+  .techs__item {
+    max-width: 84px;
+    max-height: 57px;
+    font-size: 12px;
+    letter-spacing: -0.48px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .techs {
+    padding: 68px 18px;
+  }
+
+  .techs__title {
+    font-size: 18px;
+    letter-spacing: -0.72px;
+    padding-bottom: 28px;
+  }
+
+  .techs__subtitle {
+    font-size: 30px;
+    letter-spacing: -1.2px;
+    padding-top: 49px;
+  }
+
+  .techs__description {
+    max-width: 292px;
+    font-size: 11px;
+    line-height: 16px;
+    letter-spacing: -0.44px;
+    padding-top: 13px;
+  }
+
+  .techs__list {
+    max-width: 178px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(84px, 84px));
+    padding: 49px 0 0;
+    margin: 0 auto;
+  }
+}

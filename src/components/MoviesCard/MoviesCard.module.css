@@ -1,0 +1,109 @@
+.card {
+  width: 270px;
+  height: 218px;
+  background: #fff;
+  filter: drop-shadow(0px 16px 24px rgba(0, 0, 0, 0.05));
+  position: relative;
+  font-family: "Inter", Arial, sans-serif;
+  border-radius: 10px;
+}
+
+.card__photo {
+  width: 270px;
+  height: 151px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.card__description {
+  padding: 11px 12px 17px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.card__info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card__title {
+  max-width: 206px;
+  color: #000;
+  font-size: 13px;
+  font-weight: 500;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
+.card__duration {
+  color: #a0a0a0;
+  font-size: 11px;
+  margin: 0;
+}
+
+.card__save {
+  width: 16px;
+  height: 16px;
+  border-radius: 10px;
+  background-color: #f4f4f4;
+  background-image: url(../../images/save-movie.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.card__save:hover {
+  opacity: 0.8;
+}
+
+.card__delete {
+  width: 16px;
+  height: 16px;
+  border-radius: 10px;
+  background-color: #fff;
+  background-image: url(../../images/delete-movie.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.card__delete:hover {
+  opacity: 0.8;
+}
+
+.card__save-active {
+  background-image: url(../../images/save-movie-active.svg);
+}
+
+@media screen and (max-width: 768px) {
+  .card {
+    width: 339px;
+    height: 257px;
+  }
+
+  .card__photo {
+    width: 339px;
+    height: 190px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .card {
+    width: 300px;
+    height: 235px;
+  }
+
+  .card__photo {
+    width: 300px;
+    height: 168px;
+  }
+}

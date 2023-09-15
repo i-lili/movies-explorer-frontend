@@ -1,0 +1,153 @@
+.auth {
+  font-family: "Inter", Arial, sans-serif;
+  max-width: 1280px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  padding: 70px 0;
+}
+
+.auth__title {
+  width: 396px;
+  color: #000;
+  font-size: 24px;
+  font-weight: 500;
+  margin: 0;
+  padding: 35px 0 24px;
+}
+
+.auth__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.auth__label {
+  width: 396px;
+  color: #a0a0a0;
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding-top: 18px;
+}
+
+.auth__input {
+  width: 396px;
+  color: #000;
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  border: none;
+  border-bottom: 1px solid #e8e8e8;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  outline: none;
+  padding: 5px 0 10px;
+}
+
+.auth__input:focus {
+  box-shadow: 0 -1px 0 #3456f3 inset;
+}
+
+.auth__button {
+  width: 396px;
+  height: 45px;
+  border-radius: 3px;
+  background: #3456f3;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  margin-top: 136px;
+}
+
+.auth__button:hover {
+  opacity: 0.8;
+}
+
+.auth__bottom {
+  padding-top: 16px;
+}
+
+.auth__bottom-text {
+  color: #a0a0a0;
+  font-size: 14px;
+  text-align: center;
+  margin: 0;
+}
+
+.auth__bottom-link {
+  color: #3456f3;
+  text-align: center;
+  font-size: 14px;
+  text-decoration: none;
+  padding-left: 6px;
+}
+
+.auth__bottom-link:hover {
+  opacity: 0.7;
+}
+
+.validation-text {
+  width: 390px;
+  color: #ee3465;
+  font-size: 10px;
+  font-weight: 400;
+  padding-top: 6px;
+}
+
+@media screen and (max-width: 520px) {
+  .auth {
+    padding: 56px 30px 30px;
+    height: auto;
+  }
+
+  .auth__top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .auth__title {
+    width: 260px;
+    padding: 50px 0 63px;
+  }
+
+  .auth__label {
+    width: 260px;
+  }
+
+  .auth__input {
+    width: 260px;
+  }
+
+  .auth__button {
+    width: 260px;
+    font-size: 12px;
+  }
+
+  .auth__bottom {
+    padding-top: 16px;
+  }
+
+  .auth__bottom-text {
+    font-size: 12px;
+  }
+
+  .auth__bottom-link {
+    font-size: 12px;
+    padding-left: 7px;
+  }
+
+  .validation-text {
+    width: 260px;
+  }
+}
