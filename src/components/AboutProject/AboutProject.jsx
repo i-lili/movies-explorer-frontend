@@ -6,7 +6,6 @@ const AboutProject = () => {
     <section id="project" className={styles.aboutProject}>
       <h2 className={styles.aboutProject__title}>О проекте</h2>
       <article className={styles.aboutProject__description}>
-        {/* Сетка описания этапов и времени выполнения проекта */}
         <div className={styles.aboutProject__descriptionGrid}>
           <h3
             className={`${styles.aboutProject__subtitle} ${styles.aboutProject__stage1}`}
@@ -32,16 +31,16 @@ const AboutProject = () => {
           </p>
         </div>
         <div className={styles.aboutProject__timelineGrid}>
-          <div
+          <time
             className={`${styles.aboutProject__time} ${styles.aboutProject__timeBackground1}`}
           >
             1 неделя
-          </div>
-          <div
+          </time>
+          <time
             className={`${styles.aboutProject__time} ${styles.aboutProject__timeBackground4}`}
           >
             4 недели
-          </div>
+          </time>
           <p className={styles.aboutProject__stage}>Back-end</p>
           <p className={styles.aboutProject__stage}>Front-end</p>
         </div>

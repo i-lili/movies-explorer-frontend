@@ -7,18 +7,13 @@ import styles from "./SavedMovies.module.css";
 
 // Компонент для отображения сохраненных фильмов пользователя
 function SavedMovies() {
-  const isLoading = false; 
+  const isLoading = false;
   return (
-    <section className={styles["saved-movies"]}>
+    <main className={styles["saved-movies"]}>
       <SearchForm />
 
-      {isLoading ? (
-        <Preloader />
-      ) : (
-        <MoviesCardList isSavedPage={true} />
-      )}
-
-    </section>
+      {isLoading ? <Preloader /> : <MoviesCardList isSavedPage={true} />}
+    </main>
   );
 }
 

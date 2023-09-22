@@ -2,27 +2,33 @@ import React from "react";
 import styles from "./Profile.module.css";
 
 // Компонент для отображения профиля пользователя
-function Profile() {
+function Profile({ onLogout }) {
   return (
-    <section className={styles.profile}>
+    <main className={styles.profile}>
       <h1 className={styles.profile__title}>Привет, Виталий!</h1>
 
       <div className={styles.profile__info}>
-        <p className={styles.profile__label}>Имя</p>
+        <label htmlFor="name" className={styles.profile__label}>
+          Имя
+        </label>
         <input
+          id="name"
           className={styles.profile__dataInput}
           type="text"
-          readOnly  // поле только для чтения
+          readOnly
           value="Виталий"
         />
       </div>
 
       <div className={styles.profile__info}>
-        <p className={styles.profile__label}>E-mail</p>
+        <label htmlFor="email" className={styles.profile__label}>
+          E-mail
+        </label>
         <input
+          id="email"
           className={styles.profile__dataInput}
           type="email"
-          readOnly  // поле только для чтения
+          readOnly
           value="pochta@yandex.ru"
         />
       </div>
@@ -34,10 +40,14 @@ function Profile() {
         Редактировать
       </button>
 
-      <button className={styles.profile__logout} aria-label="Выйти из аккаунта">
+      <button
+        className={styles.profile__logout}
+        aria-label="Выйти из аккаунта"
+        onClick={onLogout}
+      >
         Выйти из аккаунта
       </button>
-    </section>
+    </main>
   );
 }
 

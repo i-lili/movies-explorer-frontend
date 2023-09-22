@@ -6,57 +6,55 @@ import arrowImage from "../../images/project-arrow.svg";
 const Portfolio = () => {
   return (
     <section className={styles.portfolio}>
-      {/* Заголовок раздела портфолио */}
-      <h2 className={styles.portfolio__title}>Портфолио</h2>
+      <h2 className={styles["portfolio__title"]}>Портфолио</h2>
 
-      {/* Список проектов в портфолио */}
-      <ul className={styles.portfolio__list}>
-        <li className={styles.portfolio__item}>
-          {/* Заголовок проекта */}
-          <h3 className={styles.portfolio__itemTitle}>Статичный сайт</h3>
-          {/* Ссылка на проект с изображением стрелки */}
+      <ul className={styles["portfolio__list"]}>
+        <li className={styles["portfolio__item"]}>
           <a
             href="https://github.com/i-lili/how-to-learn"
             target="_blank"
             rel="noopener noreferrer"
-            className={styles.portfolio__link}
+            className={styles["portfolio__link"]}
           >
+            <h3 className={styles["portfolio__item-title"]}>Статичный сайт</h3>
             <img
               src={arrowImage}
-              alt="Стрелка указывающая на проект Статичный сайт"
-              className={styles.portfolio__arrow}
+              alt="Ссылка на проект Статичный сайт с изображением стрелки"
+              className={styles["portfolio__link-arrow"]}
             />
           </a>
         </li>
-        <li className={styles.portfolio__item}>
-          <h3 className={styles.portfolio__itemTitle}>Адаптивный сайт</h3>
+
+        <li className={styles["portfolio__item"]}>
           <a
             href="https://github.com/i-lili/russian-travel"
             target="_blank"
             rel="noopener noreferrer"
-            className={styles.portfolio__link}
+            className={styles["portfolio__link"]}
           >
+            <h3 className={styles["portfolio__item-title"]}>Адаптивный сайт</h3>
             <img
               src={arrowImage}
-              alt="Стрелка указывающая на проект Адаптивный сайт"
-              className={styles.portfolio__arrow}
+              alt="Ссылка на проект Адаптивный сайт с изображением стрелки"
+              className={styles["portfolio__link-arrow"]}
             />
           </a>
         </li>
-        <li className={styles.portfolio__item}>
-          <h3 className={styles.portfolio__itemTitle}>
-            Одностраничное приложение
-          </h3>
+
+        <li className={styles["portfolio__item"]}>
           <a
             href="https://github.com/i-lili/react-mesto-api-full-gha"
             target="_blank"
             rel="noopener noreferrer"
-            className={styles.portfolio__link}
+            className={styles["portfolio__link"]}
           >
+            <h3 className={styles["portfolio__item-title"]}>
+              Одностраничное приложение
+            </h3>
             <img
               src={arrowImage}
-              alt="Стрелка указывающая на проект Одностраничное приложение"
-              className={styles.portfolio__arrow}
+              alt="Ссылка на проект Одностраничное приложение с изображением стрелки"
+              className={styles["portfolio__link-arrow"]}
             />
           </a>
         </li>

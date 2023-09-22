@@ -30,6 +30,11 @@
   line-height: 16px;
   text-decoration-line: underline;
   text-underline-offset: 3px;
+  transition: opacity 0.3s;
+}
+
+.navtab__link:hover {
+  opacity: 0.7;
 }
 
 @media screen and (max-width: 450px) {

@@ -1,13 +1,14 @@
 .auth {
   font-family: "Inter", Arial, sans-serif;
   max-width: 1280px;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   background: #fff;
   padding: 70px 0;
+  box-sizing: border-box;
 }
 
 .auth__title {
@@ -48,7 +49,7 @@
   border-bottom: 1px solid #e8e8e8;
   transition: border-color 0.3s, box-shadow 0.3s;
   outline: none;
-  padding: 5px 0 10px;
+  padding: 5px 0 11px;
 }
 
 .auth__input:focus {
@@ -65,7 +66,16 @@
   font-weight: 500;
   cursor: pointer;
   border: none;
-  margin-top: 136px;
+}
+
+/* Для кнопки регистрации */
+.auth__button_register {
+  margin-top: 144px;
+}
+
+/* Для кнопки входа */
+.auth__button_login {
+  margin-top: 212px;
 }
 
 .auth__button:hover {
@@ -88,7 +98,7 @@
   text-align: center;
   font-size: 14px;
   text-decoration: none;
-  padding-left: 6px;
+  padding-left: 2px;
 }
 
 .auth__bottom-link:hover {
@@ -103,10 +113,17 @@
   padding-top: 6px;
 }
 
+@media screen and (max-width: 768px) {
+  .auth {
+    min-height: 1024px;
+    padding: 0;
+  }
+}
 @media screen and (max-width: 520px) {
   .auth {
     padding: 56px 30px 30px;
-    height: auto;
+    min-height: 780px;
+    justify-content: flex-start;
   }
 
   .auth__top {
@@ -118,7 +135,7 @@
 
   .auth__title {
     width: 260px;
-    padding: 50px 0 63px;
+    padding: 47px 0 63px;
   }
 
   .auth__label {
@@ -127,6 +144,7 @@
 
   .auth__input {
     width: 260px;
+    padding: 5px 0 10px;
   }
 
   .auth__button {
@@ -134,8 +152,16 @@
     font-size: 12px;
   }
 
+  .auth__button_register {
+    margin-top: 234px;
+  }
+
+  .auth__button_login {
+    margin-top: 303px;
+  }
+
   .auth__bottom {
-    padding-top: 16px;
+    padding-top: 14px;
   }
 
   .auth__bottom-text {

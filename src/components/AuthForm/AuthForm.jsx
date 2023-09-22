@@ -29,7 +29,7 @@ function AuthForm({
   };
 
   return (
-    <section className={styles.auth}>
+    <main className={styles.auth}>
       <div className={styles["auth__top"]}>
         {/* Логотип */}
         <Link to="/">
@@ -53,11 +53,14 @@ function AuthForm({
             </label>
             <Input
               type="text"
+              placeholder="Введите ваше имя"
               value={values.name || ""}
               onChange={handleChange}
               name="name"
               id="name"
               required
+              minLength="2"
+              maxLength="50"
               className={styles["auth__input"]}
             />
             {/* Отображение ошибок валидации для поля "Имя" */}
@@ -73,6 +76,7 @@ function AuthForm({
         </label>
         <Input
           type="email"
+          placeholder="Введите ваш email"
           value={values.email || ""}
           onChange={handleChange}
           name="email"
@@ -91,11 +95,14 @@ function AuthForm({
         </label>
         <Input
           type="password"
+          placeholder="Введите ваш пароль"
           value={values.password || ""}
           onChange={handleChange}
           name="password"
           id="password"
           required
+          minLength="8"
+          maxLength="50"
           className={styles["auth__input"]}
         />
         {/* Отображение ошибок валидации для поля "Пароль" */}
@@ -106,7 +113,11 @@ function AuthForm({
         {/* Кнопка отправки формы */}
         <button
           type="submit"
-          className={styles["auth__button"]}
+          className={`${styles["auth__button"]} ${
+            isLogin
+              ? styles["auth__button_login"]
+              : styles["auth__button_register"]
+          }`}
           disabled={!isValid}
         >
           {buttonText}
@@ -126,7 +137,7 @@ function AuthForm({
           </div>
         )}
       </Form>
-    </section>
+    </main>
   );
 }
 

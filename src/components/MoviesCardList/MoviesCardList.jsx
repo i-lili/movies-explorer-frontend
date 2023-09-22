@@ -85,6 +85,7 @@ function MoviesCardList({ movies, isSavedPage }) {
       {/* Отображаем кнопку "Ещё", если есть еще карточки для отображения */}
       {demoCards.length > displayedCardsCount && (
         <button
+          type="button"
           className={styles["movies-card-list__more-button"]}
           onClick={handleMoreButtonClick}
         >

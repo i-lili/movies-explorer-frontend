@@ -2,7 +2,6 @@ import { useState, useCallback } from "react";
 
 // Хук для управления формой и её валидацией
 function useFormAndValidation() {
-  
   // Состояние для хранения значений полей формы
   const [values, setValues] = useState({});
   // Состояние для хранения ошибок валидации
@@ -15,11 +14,11 @@ function useFormAndValidation() {
     const target = event.target;
     const value = target.value;
     const name = target.name;
-    
+
     // Обновляем состояние значений и ошибок при изменении поля
     setValues({ ...values, [name]: value });
     setErrors({ ...errors, [name]: target.validationMessage });
-    
+
     // Обновляем состояние валидности формы
     setIsValid(target.closest("form").checkValidity());
   };

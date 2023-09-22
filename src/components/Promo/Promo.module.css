@@ -1,6 +1,11 @@
 .promo {
+  min-height: 590px;
+}
+
+.promo__content {
   min-height: 524px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   background-color: #dddee3;
@@ -25,7 +30,7 @@
 }
 
 @media screen and (max-width: 800px) {
-  .promo {
+  .promo__content {
     min-height: 784px;
     background-position: 50% 48%;
   }
@@ -36,7 +41,7 @@
 }
 
 @media screen and (max-width: 500px) {
-  .promo {
+  .promo__content {
     background-size: 248px 248px;
     background-position: 50% 44%;
     min-height: 570px;

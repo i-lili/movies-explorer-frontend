@@ -50,6 +50,10 @@
   padding: 0;
 }
 
+.search__input:focus {
+  box-shadow: 0 -1px 0 #3456f3 inset;
+}
+
 .search__button {
   width: 80px;
   height: 34px;

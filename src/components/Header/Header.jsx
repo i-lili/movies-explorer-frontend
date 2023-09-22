@@ -49,4 +49,4 @@ const Header = ({ loggedIn, isMenuOpen, setIsMenuOpen }) => {
   );
 };
 
-export default Header; 
+export default Header;

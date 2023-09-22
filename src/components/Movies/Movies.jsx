@@ -7,10 +7,10 @@ import styles from "./Movies.module.css";
 // Компонент Movies отображает страницу с фильмами
 function Movies({ movies, isLoading }) {
   return (
-    <section className={styles.movies}>
+    <main className={styles.movies}>
       <SearchForm />
       {isLoading ? <Preloader /> : <MoviesCardList movies={movies} />}
-    </section>
+    </main>
   );
 }
 
