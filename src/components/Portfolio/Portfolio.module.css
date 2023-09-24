@@ -1,0 +1,120 @@
+.portfolio {
+  max-width: 1280px;
+  font-family: "Inter", Arial, sans-serif;
+  padding: 0 70px 107px;
+  box-sizing: border-box;
+}
+
+.portfolio__title {
+  color: #a0a0a0;
+  font-feature-settings: "clig" off, "liga" off;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  margin: 0;
+  padding-bottom: 48px;
+}
+
+.portfolio__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.portfolio__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1140px;
+  border-bottom: 1px solid #e8e8e8;
+  padding-bottom: 18px;
+  color: #000;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 50px;
+  letter-spacing: -1.2px;
+}
+
+.portfolio__item:last-of-type {
+  border-bottom: none;
+}
+
+.portfolio__item-title {
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 50px;
+  letter-spacing: -1.2px;
+  margin: 0;
+  transition: opacity 0.3s;
+  color: #000;
+}
+
+.portfolio__link:hover .portfolio__item-title,
+.portfolio__link:hover .portfolio__link-arrow {
+  opacity: 0.7;
+}
+
+.portfolio__link {
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.portfolio__link-arrow {
+  padding-right: 7px;
+  transition: opacity 0.3s;
+}
+
+@media screen and (max-width: 768px) {
+  .portfolio {
+    padding: 0 50px 90px;
+  }
+
+  .portfolio__item-title {
+    font-size: 28px;
+    letter-spacing: -1.12px;
+  }
+
+  .portfolio__link-arrow {
+    padding-right: 5px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .portfolio {
+    padding: 0 14px;
+  }
+
+  .portfolio__title {
+    font-size: 14px;
+    padding-bottom: 40px;
+  }
+
+  .portfolio__list {
+    gap: 20px;
+  }
+
+  .portfolio__item {
+    padding-bottom: 19px;
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: -0.72px;
+  }
+
+  .portfolio__item-title {
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: -0.72px;
+  }
+
+  .portfolio__link-arrow {
+    width: 10px;
+    padding: 6px 5px 4px 0;
+  }
+}
