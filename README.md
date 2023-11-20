@@ -21,7 +21,7 @@
 - Адаптивная вёрстка
 
 ## Пулл Реквест
-Ссылка на пулл реквест: 
+Ссылка на пулл реквест: [Пулл Реквест для ветки level-3](https://github.com/i-lili/movies-explorer-frontend/pull/2)
 
 ## Задеплоенный проект
 Ссылка на задеплоенный проект: [Movies Explorer](https://moviesdiploma.nomoreparties.sbs)
