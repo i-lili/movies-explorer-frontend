@@ -14,6 +14,7 @@ function AuthForm({
   alternativeText,
   alternativeLink,
   onSubmitAction,
+  error,
 }) {
   // Хуки для управления данными и валидации формы
   const { values, handleChange, errors, isValid } = useFormAndValidation();
@@ -64,7 +65,7 @@ function AuthForm({
               className={styles["auth__input"]}
             />
             {/* Отображение ошибок валидации для поля "Имя" */}
-            <span id="name-error" className={styles["validation-text"]}>
+            <span id="name-error" className={styles["auth__validation-text"]}>
               {errors.name}
             </span>
           </React.Fragment>
@@ -83,9 +84,10 @@ function AuthForm({
           id="email"
           required
           className={styles["auth__input"]}
+          autoComplete="email"
         />
         {/* Отображение ошибок валидации для поля "E-mail" */}
-        <span id="email-error" className={styles["validation-text"]}>
+        <span id="email-error" className={styles["auth__validation-text"]}>
           {errors.email}
         </span>
 
@@ -104,24 +106,29 @@ function AuthForm({
           minLength="8"
           maxLength="50"
           className={styles["auth__input"]}
+          autoComplete={isLogin ? "current-password" : "new-password"}
         />
         {/* Отображение ошибок валидации для поля "Пароль" */}
-        <span id="password-error" className={styles["validation-text"]}>
+        <span id="password-error" className={styles["auth__validation-text"]}>
           {errors.password}
         </span>
 
+        {error && <p className={styles["auth__error-message"]}>{error}</p>}
         {/* Кнопка отправки формы */}
         <button
           type="submit"
-          className={`${styles["auth__button"]} ${
-            isLogin
-              ? styles["auth__button_login"]
-              : styles["auth__button_register"]
-          }`}
+          className={`${styles["auth__button"]} 
+                ${!isValid ? styles["auth__button_disabled"] : ""} 
+                ${
+                  isLogin
+                    ? styles["auth__button_login"]
+                    : styles["auth__button_register"]
+                }`}
           disabled={!isValid}
         >
           {buttonText}
         </button>
+
         {/* Альтернативный текст и ссылка для переключения между регистрацией и входом */}
         {alternativeText && alternativeLink && (
           <div className={styles["auth__bottom"]}>

@@ -1,7 +1,7 @@
 import React from "react";
 import AuthForm from "../AuthForm/AuthForm";
 
-function Login() {
+function Login({ onLogin, loginError }) {
   return (
     <AuthForm
       isLogin={true}
@@ -10,9 +10,9 @@ function Login() {
       alternativeText="Ещё не зарегистрированы?"
       alternativeLink="/signup"
       onSubmitAction={(email, password) => {
-        // В этом месте будет код для авторизации пользователя
-        console.log(email, password);
+        onLogin(email, password);
       }}
+      error={loginError}
     />
   );
 }

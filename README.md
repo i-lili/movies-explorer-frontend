@@ -19,3 +19,9 @@
 - React Router
 - CSS
 - Адаптивная вёрстка
+
+## Пулл Реквест
+Ссылка на пулл реквест: 
+
+## Задеплоенный проект
+Ссылка на задеплоенный проект: [Movies Explorer](https://moviesdiploma.nomoreparties.sbs)

@@ -1,7 +1,12 @@
 import React from "react";
 import AuthForm from "../AuthForm/AuthForm";
 
-function Register() {
+function Register({ onRegister, registrationError }) {  
+  const handleSubmit = (name, email, password) => {
+    onRegister(name, email, password);
+};
+
+
   return (
     <AuthForm
       isLogin={false}
@@ -9,10 +14,8 @@ function Register() {
       buttonText="Зарегистрироваться"
       alternativeText="Уже зарегистрированы?"
       alternativeLink="/signin"
-      onSubmitAction={(name, email, password) => {
-        // В этом месте будет  код для регистрации пользователя
-        console.log(name, email, password);
-      }}
+      onSubmitAction={handleSubmit}  
+      error={registrationError}     
     />
   );
 }
