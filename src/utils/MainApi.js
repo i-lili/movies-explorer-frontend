@@ -92,7 +92,7 @@ class MainApi {
 
 // Создание экземпляра класса MainApi с передачей базового URL и заголовков
 const mainApi = new MainApi({
-  baseUrl: "https://moviesdiploma.nomoreparties.sbs",
+  baseUrl: "https://api.moviesdiploma.nomoreparties.sbs",
   headers: {
     "Content-Type": "application/json",
     Authorization: `Bearer ${localStorage.getItem("jwt")}`, 
@@ -100,3 +100,4 @@ const mainApi = new MainApi({
 });
 
 export default mainApi;
+
