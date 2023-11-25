@@ -24,6 +24,11 @@ function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
 
+  // Cостояния для ошибок разных форм
+  const [loginError, setLoginError] = useState(null);
+  const [registerError, setRegisterError] = useState(null);
+  const [profileError, setProfileError] = useState(null);
+
   // Используем хуки и функции из useMovies для управления фильмами
   const {
     movies,
@@ -68,7 +73,7 @@ function App() {
       const response = await MainApi.register({ name, email, password });
       handleAuthResponse(response);
     } catch (error) {
-      setError(`Ошибка при регистрации пользователя: ${error.message}`);
+      setRegisterError(`Ошибка при регистрации пользователя: ${error.message}`);
     }
   };
 
@@ -77,7 +82,7 @@ function App() {
       const response = await MainApi.login({ email, password });
       handleAuthResponse(response);
     } catch (error) {
-      setError(`Ошибка при входе пользователя: ${error.message}`);
+      setLoginError(`Ошибка при входе пользователя: ${error.message}`);
     }
   };
 
@@ -105,7 +110,7 @@ function App() {
       const updatedUser = await MainApi.editUserInfo({ name, email });
       setCurrentUser(updatedUser);
     } catch (error) {
-      setError(`Ошибка при обновлении профиля: ${error.message}`);
+      setProfileError(`Ошибка при обновлении профиля: ${error.message}`);
     }
   };
 
@@ -144,10 +149,21 @@ function App() {
   }, [fetchCurrentUser, loggedIn, setSavedMovies, setError]);
 
   useEffect(() => {
+    // Загружаем фильмы, если пользователь вошел и список фильмов пуст
     if (loggedIn && allMovies.length === 0) {
       fetchMovies();
     }
   }, [loggedIn, allMovies, fetchMovies]);
+
+  // Перенаправление с маршрутов аутентификации, если пользователь уже вошел в систему
+  useEffect(() => {
+    if (
+      loggedIn &&
+      (location.pathname === "/signin" || location.pathname === "/signup")
+    ) {
+      navigate("/");
+    }
+  }, [loggedIn, location.pathname, navigate]);
 
   // Закрыть меню при изменении маршрута
   useEffect(() => {
@@ -168,9 +184,17 @@ function App() {
         <Routes>
           <Route
             path="/signup"
-            element={<Register onRegister={handleRegister} />}
+            element={
+              <Register
+                onRegister={handleRegister}
+                registrationError={registerError}
+              />
+            }
           />
-          <Route path="/signin" element={<Login onLogin={handleLogin} />} />
+          <Route
+            path="/signin"
+            element={<Login onLogin={handleLogin} loginError={loginError} />}
+          />
           <Route path="/" element={<Main />} index />
 
           <Route
@@ -212,6 +236,8 @@ function App() {
                 <Profile
                   onLogout={handleLogout}
                   onUpdateUser={handleUpdateUser}
+                  profileError={profileError}
+                  setProfileError={setProfileError}
                 />
               </ProtectedRoute>
             }

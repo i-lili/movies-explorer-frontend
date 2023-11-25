@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect } from "react";
 import moviesApi from "../utils/MoviesApi";
 import MainApi from "../utils/MainApi";
+import { SHORT_MOVIE_DURATION } from "../constants/constants";
 
 const useMovies = () => {
   // Состояния для хранения данных о фильмах, состояния загрузки, ошибок и флага поиска
@@ -24,45 +25,56 @@ const useMovies = () => {
     return { savedQuery, savedIsShort, savedSearch };
   }, []);
 
+  // Пустой useCallback для загрузки фильмов
   const fetchMovies = useCallback(async () => {}, []);
 
   // Функция для поиска и фильтрации фильмов
   const handleSearch = async (query, isShort) => {
     setIsLoading(true);
     setError(null);
-    try {
-      let filteredMovies = allMovies;
 
-      if (!allMovies.length) {
+    if (!allMovies.length) {
+      try {
+        // Загрузка фильмов с сервера, если они еще не загружены
         const fetchedMovies = await moviesApi.getMovies();
         setAllMovies(fetchedMovies);
         localStorage.setItem("movies", JSON.stringify(fetchedMovies));
-        filteredMovies = fetchedMovies;
+        performSearch(fetchedMovies, query, isShort);
+      } catch (error) {
+        setError("Ошибка при поиске фильмов");
+        setIsLoading(false);
       }
-
-      filteredMovies = filteredMovies.filter(
-        (movie) =>
-          movie.nameRU.toLowerCase().includes(query.toLowerCase()) ||
-          movie.nameEN.toLowerCase().includes(query.toLowerCase())
-      );
-
-      if (isShort) {
-        filteredMovies = filteredMovies.filter((movie) => movie.duration <= 40);
-      }
-
-      setMovies(filteredMovies);
-      setHasSearched(true);
-
-      localStorage.setItem("searchQuery", query);
-      localStorage.setItem("isShort", JSON.stringify(isShort));
-      localStorage.setItem("savedSearch", JSON.stringify(filteredMovies));
-    } catch (error) {
-      setError("Ошибка при поиске фильмов");
-    } finally {
-      setIsLoading(false);
+    } else {
+      // Поиск по уже загруженным фильмам
+      performSearch(allMovies, query, isShort);
     }
   };
 
+  // Функция для выполнения фильтрации фильмов
+  const performSearch = (movies, query, isShort) => {
+    let filteredMovies = movies.filter(
+      (movie) =>
+        movie.nameRU.toLowerCase().includes(query.toLowerCase()) ||
+        movie.nameEN.toLowerCase().includes(query.toLowerCase())
+    );
+
+    if (isShort) {
+      filteredMovies = filteredMovies.filter(
+        (movie) => movie.duration <= SHORT_MOVIE_DURATION
+      );
+    }
+
+    setMovies(filteredMovies);
+    setHasSearched(true);
+
+    localStorage.setItem("searchQuery", query);
+    localStorage.setItem("isShort", JSON.stringify(isShort));
+    localStorage.setItem("savedSearch", JSON.stringify(filteredMovies));
+
+    setIsLoading(false);
+  };
+
+  // Функция для сохранения фильма
   const handleSaveMovie = async (movie) => {
     try {
       // Подготовка данных о фильме для сохранения
@@ -103,7 +115,7 @@ const useMovies = () => {
       })
       .catch((error) => {
         setError(`Ошибка при удалении фильма: ${error.message}`);
-      });      
+      });
   };
 
   // Функция для сохранения фильма в локальное хранилище
@@ -132,8 +144,13 @@ const useMovies = () => {
     const { savedQuery, savedIsShort, savedSearch } = getSavedData();
     if (savedQuery !== null) setQuery(savedQuery);
     if (savedIsShort !== null) setIsShort(savedIsShort);
+
+    if (localStorage.getItem("movies")) {
+      const storedMovies = JSON.parse(localStorage.getItem("movies"));
+      setAllMovies(storedMovies);
+    }
+
     if (savedSearch !== null) {
-      setAllMovies(savedSearch);
       setMovies(savedSearch);
       setHasSearched(true);
     }

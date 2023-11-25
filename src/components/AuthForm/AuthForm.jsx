@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Form from "../Form/Form";
 import Input from "../Input/Input";
@@ -18,14 +18,20 @@ function AuthForm({
 }) {
   // Хуки для управления данными и валидации формы
   const { values, handleChange, errors, isValid } = useFormAndValidation();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Обработчик отправки формы
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    if (isLogin) {
-      onSubmitAction(values.email, values.password);
-    } else {
-      onSubmitAction(values.name, values.email, values.password);
+    setIsSubmitting(true);
+    try {
+      if (isLogin) {
+        await onSubmitAction(values.email, values.password);
+      } else {
+        await onSubmitAction(values.name, values.email, values.password);
+      }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -63,6 +69,7 @@ function AuthForm({
               minLength="2"
               maxLength="50"
               className={styles["auth__input"]}
+              disabled={isSubmitting}
             />
             {/* Отображение ошибок валидации для поля "Имя" */}
             <span id="name-error" className={styles["auth__validation-text"]}>
@@ -85,6 +92,7 @@ function AuthForm({
           required
           className={styles["auth__input"]}
           autoComplete="email"
+          disabled={isSubmitting}
         />
         {/* Отображение ошибок валидации для поля "E-mail" */}
         <span id="email-error" className={styles["auth__validation-text"]}>
@@ -107,24 +115,27 @@ function AuthForm({
           maxLength="50"
           className={styles["auth__input"]}
           autoComplete={isLogin ? "current-password" : "new-password"}
+          disabled={isSubmitting}
         />
         {/* Отображение ошибок валидации для поля "Пароль" */}
         <span id="password-error" className={styles["auth__validation-text"]}>
           {errors.password}
         </span>
 
+        {/* Отображение сообщений об ошибке */}
         {error && <p className={styles["auth__error-message"]}>{error}</p>}
+
         {/* Кнопка отправки формы */}
         <button
           type="submit"
-          className={`${styles["auth__button"]} 
-                ${!isValid ? styles["auth__button_disabled"] : ""} 
-                ${
-                  isLogin
-                    ? styles["auth__button_login"]
-                    : styles["auth__button_register"]
-                }`}
-          disabled={!isValid}
+          className={`${styles["auth__button"]} ${
+            !isValid || isSubmitting ? styles["auth__button_disabled"] : ""
+          } ${
+            isLogin
+              ? styles["auth__button_login"]
+              : styles["auth__button_register"]
+          }`}
+          disabled={!isValid || isSubmitting}
         >
           {buttonText}
         </button>

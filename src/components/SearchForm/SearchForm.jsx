@@ -37,7 +37,11 @@ function SearchForm({ onSearch, query, setQuery, isShort, setIsShort }) {
       <form className={styles.search__form} onSubmit={handleSubmit}>
         {formError && <p className={styles.error}>{formError}</p>}
         <div className={styles.search__box}>
-          <img src={searchIcon} alt="Иконка поиска" className={styles.search__icon} />
+          <img
+            src={searchIcon}
+            alt="Иконка поиска"
+            className={styles.search__icon}
+          />
           <input
             type="text"
             placeholder="Фильм"
@@ -47,7 +51,11 @@ function SearchForm({ onSearch, query, setQuery, isShort, setIsShort }) {
             onChange={(e) => setQuery(e.target.value)}
             disabled={isSubmitting}
           />
-          <button type="submit" className={styles.search__button} disabled={isSubmitting}>
+          <button
+            type="submit"
+            className={styles.search__button}
+            disabled={isSubmitting}
+          >
             <img src={findIcon} alt="Кнопка поиска" />
           </button>
           <div className={styles.search__separator}></div>
@@ -59,8 +67,9 @@ function SearchForm({ onSearch, query, setQuery, isShort, setIsShort }) {
             className={styles.search__checkboxInput}
             checked={isShort}
             onChange={handleCheckboxChange}
+            disabled={isSubmitting}
           />
-          <label htmlFor="short-movies" className={styles.search__checkboxLabel}>
+          <label className={styles.search__checkboxLabel}>
             Короткометражки
           </label>
         </div>

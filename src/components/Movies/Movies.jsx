@@ -50,7 +50,7 @@ function Movies({
               savedMovies={savedMovies}
             />
           )}
-        </> 
+        </>
       )}
     </main>
   );

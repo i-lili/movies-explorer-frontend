@@ -1,18 +1,18 @@
 class MainApi {
   constructor(options) {
-    this._baseUrl = options.baseUrl; 
-    this._headers = options.headers; 
+    this._baseUrl = options.baseUrl;
+    this._headers = options.headers;
   }
 
   setAuthToken(token) {
-    this._headers.Authorization = `Bearer ${token}`; 
+    this._headers.Authorization = `Bearer ${token}`;
   }
 
   async _getJson(res) {
     if (res.ok) {
-      return await res.json(); 
+      return await res.json();
     }
-    throw new Error(`Ошибка: ${res.status}`); 
+    throw new Error(`Ошибка: ${res.status}`);
   }
 
   // Регистрация пользователя
@@ -95,9 +95,8 @@ const mainApi = new MainApi({
   baseUrl: "https://api.moviesdiploma.nomoreparties.sbs",
   headers: {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${localStorage.getItem("jwt")}`, 
+    Authorization: `Bearer ${localStorage.getItem("jwt")}`,
   },
 });
 
 export default mainApi;
-

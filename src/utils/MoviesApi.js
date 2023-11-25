@@ -1,7 +1,7 @@
 class MoviesApi {
   constructor(options) {
-    this._baseUrl = options.baseUrl; 
-    this._headers = options.headers; 
+    this._baseUrl = options.baseUrl;
+    this._headers = options.headers;
   }
 
   async _getJson(res) {

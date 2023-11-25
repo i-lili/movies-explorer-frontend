@@ -4,7 +4,7 @@ import useFormAndValidation from "../useFormAndValidation/useFormAndValidation";
 import Form from "../Form/Form";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-function Profile({ onLogout, onUpdateUser }) {
+function Profile({ onLogout, onUpdateUser, profileError, setProfileError }) {
   // Получение данных текущего пользователя из контекста
   const currentUser = useContext(CurrentUserContext);
 
@@ -12,32 +12,45 @@ function Profile({ onLogout, onUpdateUser }) {
   const { values, handleChange, errors, isValid, setValues } =
     useFormAndValidation();
 
-  // Проверка наличия изменений в данных профиля
-  const hasChanges =
-    values.name !== currentUser?.name || values.email !== currentUser?.email;
-
   // Состояние для отслеживания режима редактирования профиля
   const [isEditing, setIsEditing] = useState(false);
+
+  // Состояние для отслеживания состояния отправки формы
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Состояние для отображения сообщения об успешном/неуспешном обновлении профиля
   const [editMessage, setEditMessage] = useState({ text: "", type: "" });
 
+  // Проверка наличия изменений в данных профиля
+  const hasChanges =
+    values.name !== currentUser?.name || values.email !== currentUser?.email;
+
   // Установка начальных значений формы при получении данных о текущем пользователе
   useEffect(() => {
-    if (currentUser) {
+    if (currentUser && !isEditing) {
       setValues({
         name: currentUser.name,
         email: currentUser.email,
       });
     }
-  }, [currentUser, setValues]);
+  }, [currentUser, setValues, isEditing]);
+
+  // Обновление сообщения об ошибке
+  useEffect(() => {
+    if (profileError) {
+      setEditMessage({
+        text: profileError,
+        type: "error",
+      });
+    }
+  }, [profileError]);
 
   // Обработчик отправки формы для обновления профиля
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const { name, email } = values;
+    setIsSubmitting(true);
     try {
-      await onUpdateUser(name, email);
+      await onUpdateUser(values.name, values.email);
       setEditMessage({ text: "Профиль успешно обновлен!", type: "success" });
       setIsEditing(false);
     } catch (error) {
@@ -45,6 +58,9 @@ function Profile({ onLogout, onUpdateUser }) {
         text: "Произошла ошибка при обновлении профиля.",
         type: "error",
       });
+      setIsEditing(true);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -66,7 +82,7 @@ function Profile({ onLogout, onUpdateUser }) {
             required
             minLength="2"
             maxLength="50"
-            disabled={!isEditing}
+            disabled={!isEditing || isSubmitting}
           />
           <span className={styles["profile__validation-text"]}>
             {errors.name}
@@ -85,7 +101,7 @@ function Profile({ onLogout, onUpdateUser }) {
             value={values.email || ""}
             onChange={handleChange}
             required
-            disabled={!isEditing}
+            disabled={!isEditing || isSubmitting}
           />
           <span className={styles["profile__validation-text"]}>
             {errors.email}
@@ -100,7 +116,7 @@ function Profile({ onLogout, onUpdateUser }) {
             }`}
             type="submit"
             aria-label="Сохранить"
-            disabled={!isValid || !hasChanges}
+            disabled={!isValid || !hasChanges || isSubmitting}
           >
             Сохранить
           </button>
@@ -113,7 +129,9 @@ function Profile({ onLogout, onUpdateUser }) {
               e.preventDefault();
               setIsEditing(true);
               setEditMessage({ text: "", type: "" });
+              setProfileError(null);
             }}
+            disabled={isSubmitting}
           >
             Редактировать
           </button>

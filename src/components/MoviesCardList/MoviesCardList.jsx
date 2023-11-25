@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import styles from "./MoviesCardList.module.css";
+import {
+  INITIAL_CARDS_TO_SHOW,
+  ADDITIONAL_CARDS_TO_LOAD,
+  SCREEN_WIDTH_BREAKPOINTS,
+} from "../../constants/constants";
 
 function MoviesCardList({
   movies,
@@ -23,6 +28,13 @@ function MoviesCardList({
     setDisplayedCardsCount((prev) => prev + cardsToLoad);
   };
 
+  // Эффект сбрасывает количество отображаемых карточек
+  // при каждом новом поиске (изменении movies)
+  useEffect(() => {
+    const { cardsToShow } = getCardSettings();
+    setDisplayedCardsCount(cardsToShow);
+  }, [movies]);
+
   useEffect(() => {
     if (showMoreButton) {
       let resizeTimeout;
@@ -34,7 +46,7 @@ function MoviesCardList({
           const { cardsToShow } = getCardSettings();
           setDisplayedCardsCount(cardsToShow);
         }, 300);
-      }; 
+      };
 
       // Добавление слушателя события изменения размера окна
       window.addEventListener("resize", updateDisplayedCardsCount);
@@ -83,10 +95,25 @@ function MoviesCardList({
 const getCardSettings = () => {
   const width = window.innerWidth;
 
-  if (width >= 1280) return { cardsToShow: 16, cardsToLoad: 16 };
-  if (width >= 1010) return { cardsToShow: 12, cardsToLoad: 12 };
-  if (width >= 620) return { cardsToShow: 8, cardsToLoad: 8 };
-  return { cardsToShow: 5, cardsToLoad: 5 };
+  if (width >= SCREEN_WIDTH_BREAKPOINTS.wide)
+    return {
+      cardsToShow: INITIAL_CARDS_TO_SHOW.wide,
+      cardsToLoad: ADDITIONAL_CARDS_TO_LOAD.wide,
+    };
+  if (width >= SCREEN_WIDTH_BREAKPOINTS.medium)
+    return {
+      cardsToShow: INITIAL_CARDS_TO_SHOW.medium,
+      cardsToLoad: ADDITIONAL_CARDS_TO_LOAD.medium,
+    };
+  if (width >= SCREEN_WIDTH_BREAKPOINTS.narrow)
+    return {
+      cardsToShow: INITIAL_CARDS_TO_SHOW.narrow,
+      cardsToLoad: ADDITIONAL_CARDS_TO_LOAD.narrow,
+    };
+  return {
+    cardsToShow: INITIAL_CARDS_TO_SHOW.extraNarrow,
+    cardsToLoad: ADDITIONAL_CARDS_TO_LOAD.extraNarrow,
+  };
 };
 
 export default MoviesCardList;

@@ -5,7 +5,7 @@ function MoviesCard({
   movie,
   isSavedPage,
   onSaveMovie,
-  onDeleteMovie, 
+  onDeleteMovie,
   savedMovies,
 }) {
   // Состояние для отслеживания, сохранен ли фильм
