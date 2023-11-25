@@ -6,6 +6,7 @@
   position: relative;
   font-family: "Inter", Arial, sans-serif;
   border-radius: 10px;
+  overflow: hidden;
 }
 
 .card__photo {

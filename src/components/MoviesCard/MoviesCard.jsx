@@ -1,52 +1,84 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./MoviesCard.module.css";
-import filmPhoto from "../../images/film-photo.svg";
 
-function MoviesCard({ isSavedPage }) {
-  // Хук состояния, чтобы проверить, сохранен ли фильм
+function MoviesCard({
+  movie,
+  isSavedPage,
+  onSaveMovie,
+  onDeleteMovie,
+  savedMovies,
+}) {
+  // Состояние для отслеживания, сохранен ли фильм
   const [isSaved, setIsSaved] = useState(false);
 
+  useEffect(() => {
+    // Проверка, сохранен ли фильм в списке сохраненных фильмов
+    const isMovieSaved =
+      savedMovies &&
+      savedMovies.some(
+        (savedMovie) => savedMovie.movieId === (movie && movie.id)
+      );
+    setIsSaved(isMovieSaved);
+  }, [savedMovies, movie]);
+
+  // Обработчик кнопки для сохранения или удаления фильма
   const handleButtonClick = () => {
+    const movieId = isSavedPage ? movie._id : movie.id;
+
     if (isSavedPage) {
-      // Если находимся на странице сохраненных фильмов, логика для удаления фильма будет реализована здесь
+      onDeleteMovie(movieId);
     } else {
-      // На странице всех фильмов, переключаем состояние сохранения фильма
-      setIsSaved((prevState) => !prevState);
+      if (isSaved) {
+        // Поиск сохраненного фильма для его удаления
+        const savedMovie = savedMovies.find(
+          (saved) => saved.movieId === movie.id
+        );
+        onDeleteMovie(savedMovie._id);
+      } else {
+        onSaveMovie(movie);
+      }
     }
   };
 
+  // Определение источника изображения фильма
+  const imageSource = isSavedPage
+    ? movie.image
+    : `https://api.nomoreparties.co${movie.image.url || movie.image}`;
+
   return (
     <article className={styles.card}>
-      {/* Постер фильма */}
-      <img
-        src={filmPhoto}
-        alt="Постер фильма"
-        className={styles["card__photo"]}
-      />
+      <a href={movie.trailerLink} target="_blank" rel="noopener noreferrer">
+        <img
+          src={imageSource}
+          alt="Постер фильма"
+          className={styles["card__photo"]}
+        />
+      </a>
       <div className={styles["card__description"]}>
         <div className={styles["card__info"]}>
-          {/* Название фильма */}
-          <h3 className={styles["card__title"]}>33 слова о дизайне</h3>
+          <h3 className={styles["card__title"]}>{movie.nameRU}</h3>
           {isSavedPage ? (
-            // Если находимся на странице сохраненных фильмов, показываем кнопку для удаления фильма
+            // Кнопка для удаления фильма
             <button
               className={styles["card__delete"]}
               aria-label="Удалить фильм"
               onClick={handleButtonClick}
             ></button>
           ) : (
-            // Иначе показываем кнопку для сохранения фильма
+            // Кнопка для сохранения или удаления фильма
             <button
               onClick={handleButtonClick}
               className={`${styles["card__save"]} ${
                 isSaved ? styles["card__save-active"] : ""
               }`}
-              aria-label="Сохранить фильм"
+              aria-label={isSaved ? "Удалить фильм" : "Сохранить фильм"}
             ></button>
           )}
         </div>
         {/* Длительность фильма */}
-        <p className={styles["card__duration"]}>1ч42м</p>
+        <p className={styles["card__duration"]}>
+          {Math.floor(movie.duration / 60)}ч{movie.duration % 60}м
+        </p>
       </div>
     </article>
   );
